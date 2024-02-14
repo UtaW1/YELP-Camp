@@ -1,0 +1,7 @@
+.env
+Helper for understand code/ 
+.DS_Store
+node_modules/ 
+seeds/ 
+pics/ 
+uploads/ 
