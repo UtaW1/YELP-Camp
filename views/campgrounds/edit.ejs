@@ -1,0 +1,61 @@
+<% layout('layouts/boilerplate') %>
+    <a href="/campgrounds/<%= detailCampground._id %>">Back to Campground</a>
+    
+    <div class="row">
+        <h1 class="text-center">Edit Campground</h1>
+        <div class="col-6 offset-3" >
+            <form action="/campgrounds/<%= detailCampground._id %>?_method=PUT" method="POST" novalidate class="validated-form" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label class="form-label" for="title">Title</label>
+                    <input class="form-control" type="text" name="campground[title]" id="title" value="<%= detailCampground.title %>" required>  <!-- the value of the name attribute will determine what we will target with our req.body --> 
+                    <div class="valid-feedback">
+                        Congrats! You know how to read!
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="location">Location</label>
+                    <input class="form-control" type="text" name="campground[location]" id="location" value="<%= detailCampground.location %>" required>
+                    <div class="valid-feedback">
+                        Congrats! You know how to read!
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="price">Campground Price</label>
+                    <div class="input-group">
+                        <span class="input-group-text" id="price-label">$</span>
+                        <input name="campground[price]" type="text" class="form-control" placeholder="0.0" aria-label="price" aria-describedby="price-label" value="<%= detailCampground.price %>" required>
+                        <div class="valid-feedback">
+                            Congrats! You know how to read!
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="image" class="form-label">
+                        <span class="custom-file-label">Choose image(s)...</span>
+                    </label>
+                    <input class="form-control" name="image" type="file" id="image" multiple>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="description">Description</label>
+                    <textarea class="form-control" type="text" name="campground[description]" id="description" required>
+                        <%= detailCampground.description %> 
+                    </textarea>
+                    <div class="valid-feedback">
+                        Congrats! You know how to read!
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <%detailCampground.image.forEach(function(img, i) {%>
+                        <img src="<%=img.thumbnail%>" alt="">
+                        <div class="form-check-inline">
+                            <input type="checkbox" id="image-<%=i%>" name="deleteImages[]" value="<%=img.filename%>">
+                        </div>
+                        <label for="image-<%=i%>">Delete?</label>
+                    <%})%>
+                </div>
+                <div class="mb-3">
+                    <button class="btn btn-info">Update Campground</button>
+                </div>
+            </form>
+        </div>
+    </div>
